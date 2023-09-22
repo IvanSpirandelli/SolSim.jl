@@ -1,0 +1,12 @@
+ply
+format ascii 1.0
+element vertex 1
+property float32 x
+property float32 y
+property float32 z
+property float pscale
+property uchar red
+property uchar green
+property uchar blue
+end_header
+0.0 0.0 0.0 0.5 255 255 255
