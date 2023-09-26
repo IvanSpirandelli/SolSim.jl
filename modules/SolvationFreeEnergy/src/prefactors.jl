@@ -5,8 +5,8 @@ end
 
 function get_prefactors_from_white_bear(rs::Float64, η::Float64)
     @SVector[
-    sigma(rs, η), # Area
     pressure(rs, η), # Volume
+    sigma(rs, η), # Area
     kappa(rs, η), # Mean curvature 
     kappa_bar(η), # Gaussian curvature
     ]

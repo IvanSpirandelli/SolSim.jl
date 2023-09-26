@@ -51,20 +51,20 @@ function get_measures_and_derivatives(coordinates::Vector{SVector{3, Float64}}, 
 
     n = size(coordinates)[1] * 3
 
-    dsurf_outs = [0.0 for _ in 1:n]
     dvol_outs = [0.0 for _ in 1:n]
+    dsurf_outs = [0.0 for _ in 1:n]
     dmean_outs = [0.0 for _ in 1:n]
     dgauss_outs = [0.0 for _ in 1:n]
 
     AlphaMolWrap.calculate_measures_and_derivatives(
         outs,
-        dsurf_outs,
         dvol_outs,
+        dsurf_outs,
         dmean_outs,
         dgauss_outs,
         flat,
         conv_r,
         1.0, 1.0, 1.0, 1.0, 1, 0
     )
-    outs, dsurf_outs, dvol_outs, dmean_outs, dgauss_outs
+    outs, dvol_outs, dsurf_outs, dmean_outs, dgauss_outs
 end

@@ -31,7 +31,7 @@ function test_solvation_free_energy()
     centers = [c1, c2]
     solute_radii = @SVector[r1, r2]
 
-    prefactors = @SVector[1.0/8.0,3.0/8.0,1.0/8.0,1.0/8.0]
+    prefactors = @SVector[3.0/8.0,1.0/8.0,1.0/8.0,1.0/8.0]
     e = solvation_free_energy(centers, solute_radii, prefactors)
     @test isapprox(e,4*pi)
 
@@ -64,18 +64,18 @@ function test_solvation_free_energy()
     @test isapprox(e8, e9)
 end
 
-function test_area()
-    v = [(SA_F64[0, 0, 0]), (SA_F64[2, 0, 0])]
-    r = @SVector[1,1]
-    measures = get_measures(v,r)
-    @test measures[1] == 2.0 * 4.0 * pi
-end
-
 function test_volume()
     v = [(SA_F64[0, 0, 0]), (SA_F64[2, 0, 0])]
     r = @SVector[1,1]
     measures = get_measures(v,r)
-    @test measures[2] == 2.0 * (4.0/3.0) * pi
+    @test measures[1] == 2.0 * (4.0/3.0) * pi
+end
+
+function test_area()
+    v = [(SA_F64[0, 0, 0]), (SA_F64[2, 0, 0])]
+    r = @SVector[1,1]
+    measures = get_measures(v,r)
+    @test measures[2] == 2.0 * 4.0 * pi
 end
 
 function test_mean()
