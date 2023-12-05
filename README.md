@@ -7,23 +7,9 @@ SolSim.jl is written in [Julia](https://julialang.org/).
 
 To run SolSim.jl you will need to: 
 
-1. Install and run Julia
+1. Install and run Julia 1.7.3 or later
 
-2. Add the [CxxWrap.jl](https://github.com/JuliaInterop/CxxWrap.jl) package
-
-3. Get the CxxWrap prefix path from the Julia REPL by running:  
-
-        julia> using CxxWrap
-        julia> CxxWrap.prefix_path()  
-
-4. Build [wrapped AlphaMol](https://github.com/IvanSpirandelli/AlphaMol)  
-                   
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/path/to/libcxxwrap-julia-prefix /path/to/sourcedirectory 
-        make
-
-5. Enter the path to the built 'libAlphaMol.so' in line 3 of 'modules/SolvationFreeEnergy/src/geometric_measures.jl'
-
-6. Build the SolSim.jl package
+2. Build the SolSim.jl package
 
 # Running the First Simulation
 In the scripts folder you can find some useful helper functions to run simulations. 

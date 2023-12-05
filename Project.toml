@@ -4,6 +4,7 @@ authors = ["Ivan Spirandelli <spirandelli@uni-potsdam.de>"]
 version = "0.1.0"
 
 [deps]
+AlphaMolWrapper_jll = "3fb590a3-637c-5b79-98b0-0e302591ed6a"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 CxxWrap = "1f15a43c-97ca-5a2a-ae31-89f07a497df4"
 Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"

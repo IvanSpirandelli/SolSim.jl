@@ -1,6 +1,8 @@
 module AlphaMolWrap
     using CxxWrap
-    @wrapmodule(() -> joinpath("lib/", "libAlphaMol.so"))
+    using AlphaMolWrapper_jll
+
+    @wrapmodule(() -> libalphamolwrapper)
 
     version() = VersionNumber(unsafe_string(unsafe_load(cglobal((:__gmp_version, :libgmp), Ptr{Cchar}))))
     bits_per_limb() = Int(unsafe_load(cglobal((:__gmp_bits_per_limb, :libgmp), Cint)))
