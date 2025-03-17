@@ -97,12 +97,12 @@ function solvation_free_energy_for_hard_spheres_in_bounding_box(index::Int, cent
 end
 
 function get_flattened_inflated_radii(radii::SVector, rs::Float64, n::Int)
-    flat_inflated_radii = Base.Iterators.collect(Base.Iterators.flatten([radii .+ rs for _ in 1:n]))
+    flat_inflated_radii = collect(Base.Iterators.flatten([radii .+ rs for _ in 1:n]))
     SVector(ntuple(i -> flat_inflated_radii[i], length(flat_inflated_radii)))
 end
 
 function get_flattened_inflated_radii(radii::Vector, rs::Float64, n::Int)
-    Base.Iterators.collect(Base.Iterators.flatten([radii .+ rs for _ in 1:n]))
+    collect(Base.Iterators.flatten([radii .+ rs for _ in 1:n]))
 end
 
 function get_flattened_inflated_radii(radii::Vector{Vector{Float64}}, rs::Float64)

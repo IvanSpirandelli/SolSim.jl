@@ -24,15 +24,15 @@ function get_measures(coordinates::Vector{SVector{3, Float64}}, radii::Vector)
     outs = [0.0, 0.0, 0.0, 0.0]
     AlphaMolWrap.calculate_measures(
         outs,
-        Base.Iterators.collect(Base.Iterators.flatten(coordinates)),
+        collect(Base.Iterators.flatten(coordinates)),
         radii,
-        1.0, 1.0, 1.0, 1.0, 1, 0
+        1.0, 1, 0
     )
     outs
 end
 
 function get_measures(coordinates::Vector{SVector{3, Float64}}, radii::SVector)
-    flat = Base.Iterators.collect(Base.Iterators.flatten(coordinates))
+    flat = collect(Base.Iterators.flatten(coordinates))
     conv_r = convert(Vector{Float64}, radii)
     outs = [0.0, 0.0, 0.0, 0.0]
 
@@ -40,13 +40,13 @@ function get_measures(coordinates::Vector{SVector{3, Float64}}, radii::SVector)
         outs,
         flat,
         conv_r,
-        1.0, 1.0, 1.0, 1.0, 1, 0
+        1.0, 1, 0
     )
     outs
 end
 
 function get_measures_and_derivatives(coordinates::Vector{SVector{3, Float64}}, radii::SVector)
-    flat = Base.Iterators.collect(Base.Iterators.flatten(coordinates))
+    flat = collect(Base.Iterators.flatten(coordinates))
     conv_r = convert(Vector{Float64}, radii)
 
     outs = [0.0, 0.0, 0.0, 0.0]
@@ -66,7 +66,7 @@ function get_measures_and_derivatives(coordinates::Vector{SVector{3, Float64}}, 
         dgauss_outs,
         flat,
         conv_r,
-        1.0, 1.0, 1.0, 1.0, 1, 0
+        1.0, 1, 0
     )
     outs, dvol_outs, dsurf_outs, dmean_outs, dgauss_outs
 end
