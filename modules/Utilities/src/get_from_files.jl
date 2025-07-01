@@ -47,20 +47,17 @@ end
 
 function get_measures_from_ply(filepath, rs)
     centers, radii = ply_to_vec(filepath)
-    inflated_radii = radii .+ rs
-    get_measures(centers, inflated_radii)
+    get_measures(centers, radii, rs)
 end
 
 function get_energy_from_ply(filepath, rs, prefactors)
     centers, radii = ply_to_vec(filepath)
-    inflated_radii = radii .+ rs
-    solvation_free_energy(centers, inflated_radii, prefactors)
+    solvation_free_energy(centers, radii, rs, prefactors)
 end
 
 function get_energy_from_poly(filepath, rs, prefactors)
     centers, radii = poly_to_vec(filepath)
-    inflated_radii = radii .+ rs
-    solvation_free_energy(centers, inflated_radii, prefactors)
+    solvation_free_energy(centers, radii, rs, prefactors)
 end
 
 function get_maximum_contact_clusters(num_of_balls::Int)

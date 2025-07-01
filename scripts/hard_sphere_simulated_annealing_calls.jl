@@ -3,7 +3,7 @@ using StaticArrays
 using Dates
 
 function single(;
-    solute_radii = @SVector[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+    solute_radii = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
     rs = 0.475,
     η = 0.475,
     iterations = 5000000,
@@ -18,7 +18,7 @@ function single(;
     bounds = sum([solute_radii[i] + rs for i in 1:n]) * 2.0
 
     solute = SolSim.Simulation.initialize_atoms(hot_start_file, solute_radii, bounds)
-    prefactors = SolSim.SolvationFreeEnergy.get_prefactors_from_white_bear(rs, η)
+    prefactors = SolSim.SolvationFreeEnergy.get_prefactors(rs, η; id = "amp", r = 1.0)
 
     σ = max(0.1, rs)
     
@@ -95,7 +95,7 @@ end
 
 function repeated_simulations(;
     indices = 1:10,
-    solute_radii = @SVector[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+    solute_radii = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
     rs = 0.475,
     η = 0.475,
     iterations = 5000000,
@@ -123,7 +123,7 @@ end
 function space_scanning(;
     rss = 0.0125:0.025:0.4875,
     ηs = 0.0125:0.025:0.4875,
-    solute_radii = @SVector[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+    solute_radii = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
     iterations = 5000000,
     zig_zag = [1.0, 0.5, 0.3],
     temp_finder_iterations = 100000,

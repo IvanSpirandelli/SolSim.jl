@@ -37,26 +37,36 @@ Look at generated output files in [Houdini](https://www.sidefx.com/). A Houdini 
   </tr>
  </table>
 
-<!--
-## Interactive Visualization Tool
-To do this you will need to start Julia with more than one thread. Run `julia --threads 8` to start it with eight threads for example. 
-After you have activated the SolSim.jl package run: 
+# A bug and its implications
 
-        julia> using StaticArrays
-        julia> Visualization.visualize_3d(Simulation.initialize_solute(@SVector[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]))  
+When generating the data presented in the publication: [Exotic self-assembly of hard spheres in a morphometric solvent](https://www.pnas.org/doi/10.1073/pnas.2314959121) there was bug in the calculation of the geometric measures. The mean curvature can be decomposed into positive and negative parts, i.e. $C = C^+ + C^-$. The bug was that $C^-$ was counted twice. This led to the simulations being driven by the following energy
+$$
+E = p_{wb}V + \sigma_{wb} A + \kappa_{wb} C + \overline{\kappa}_{wb} X + \kappa_{wb} C^-,
+$$
+where $p_{wb}, \sigma_{wb}, \kappa_{wb}$ and $\overline{\kappa}_{wb}$ are the [white bear prefactors](https://arxiv.org/abs/cond-mat/0606658).
 
-This will start up a GUI with eight hard spheres and default parameters for which these should assemble into a helix. The GUI was written by Lukas Mayrhofer from [TU Munich](https://www.tum.de/) and slightly adjusted to the needs of SolSim.jl.
+For a union of balls $\bigcup_{i} B_i$ with radii $r_i = R \in \mathbb{R}_{>0}$, the mean curvature $C$ can be written as
+$$
+C = C^+ + C^- = \sum_{i} \frac{A_i}{r_i+r_s} + C^- = \frac{1}{R+rs}\sum_{i} A_i + C^- = \frac{A}{R+rs} + C^-
+$$
 
-The controls of the GUI are as follows.
+Therefor we can write $E$ as follows
+$$
+E = p_{wb}V + (\sigma_{wb} - \frac{\kappa_{wb}}{R+r_s})A+ 2\kappa_{wb} C +  \overline{\kappa}_{wb} X,
+$$
+which is the classic morphometric approach with a different set of prefactors. 
 
-- Use the mouse to zoom pan and rotate the viewport.
-- The 's'-key starts the simulation
-- 'Space' runs or stops the live visualization
-- 'n' generates a new state.
+The white bear prefactors are give by:
+$$
+\beta p_{wb} = \frac{\eta}{r_s^3} \frac{3}{4\pi}\left(\frac{1+\eta+\eta^2-\eta^3}{(1-\eta)^3}\right),
+$$
+$$
+\beta \sigma_{wb} = \frac{\eta}{r_s^2} \frac{3}{4\pi} \left( - \frac{1+2\eta+8\eta^2-5\eta^3}{3(1-\eta)^3} - \frac{\operatorname{ln}(1-\eta)}{3\eta}\right),
+$$
+$$
+\beta \kappa_{wb} = \frac{\eta}{r_s} \frac{3}{4\pi} \left(\frac{4  -10\eta+20\eta^2-8\eta^3}{3(1-\eta)^3} + \frac{4\operatorname{ln}(1-\eta)}{3\eta}\right),
+$$
+$$
+\beta \overline{\kappa}_{wb} = \eta \frac{3}{4\pi} \left(\frac{-4 + 11\eta -13 \eta^2+4\eta^3}{3(1-\eta)^3} - \frac{4\operatorname{ln}(1-\eta)}{3\eta}\right).
+$$
 
-See the following screenshot for an impression: 
-
-<img src="assets/images/screenshot_gui.png" width=960>
-
-
-Please reach out to me in case you have any questions or need support at spirandelli@uni-potsdam.de -->

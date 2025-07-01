@@ -4,7 +4,7 @@ export WhiteBearParameters
 export solvation_free_energy, solvation_free_energy_for_hard_spheres
 export solvation_free_energy_for_hard_spheres_in_bounded_container
 export get_measures, get_measures_and_derivatives
-export get_prefactors_from_white_bear
+export get_prefactors, get_wb_prefactors
 export pressure, sigma, kappa, kappa_bar
 
 using StaticArrays

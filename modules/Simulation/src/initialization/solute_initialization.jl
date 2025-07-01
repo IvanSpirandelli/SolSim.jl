@@ -1,10 +1,10 @@
-function initialize_solute(radii::SVector)
+function initialize_solute(radii::Vector)
     n = length(radii)
     mR = maximum(radii)
     initialize_atoms("", radii, n*2.0*mR)
 end
 
-function initialize_solute(radii::SVector, rs::Float64)
+function initialize_solute(radii::Vector, rs::Float64)
     n = length(radii)
     mR = maximum(radii)
     initialize_atoms("", radii, n*2.0*(mR + rs))
@@ -14,7 +14,7 @@ function initialize_solute_in_bounds(radii::AbstractVector, bounds::Float64)
     initialize_atoms("", radii, bounds)
 end
 
-function initialize_atoms(hot_start_filepath::String, radii::SVector, bounds::Float64; attempts_at_random_initialization::Int = 10)
+function initialize_atoms(hot_start_filepath::String, radii::Vector, bounds::Float64; attempts_at_random_initialization::Int = 10)
     if hot_start_filepath == ""
         return initialize_atoms(radii, bounds, attempts_at_random_initialization)
     end
@@ -28,7 +28,7 @@ function get_hard_spheres_from_hot_start_file(filepath::String)
     solute
 end
 
-function initialize_atoms(radii::SVector, bounds::Float64, attempts_at_random_initialization::Int)
+function initialize_atoms(radii::Vector, bounds::Float64, attempts_at_random_initialization::Int)
     n = length(radii)
     for i in 1:attempts_at_random_initialization
         centers = [@SVector[rand(Uniform(0.0, bounds)),rand(Uniform(0.0, bounds)),rand(Uniform(0.0, bounds))] for i in 1:n]

@@ -20,53 +20,47 @@ module AlphaMolWrap
     end
 end
 
-function get_measures(coordinates::Vector{SVector{3, Float64}}, radii::Vector)
+function get_measures(
+    atom_coordinates::Vector, 
+    atom_radii::Vector, 
+    probe_radius::Float64,
+    delaunay_eps::Float64 = 1.0)
     outs = [0.0, 0.0, 0.0, 0.0]
-    AlphaMolWrap.calculate_measures(
+    AlphaMolWrap.get_geometric_measures(
         outs,
-        collect(Base.Iterators.flatten(coordinates)),
-        radii,
-        1.0, 1, 0
+        collect(Base.Iterators.flatten(atom_coordinates)),
+        atom_radii,
+        probe_radius,
+        delaunay_eps
     )
     outs
 end
 
-function get_measures(coordinates::Vector{SVector{3, Float64}}, radii::SVector)
-    flat = collect(Base.Iterators.flatten(coordinates))
-    conv_r = convert(Vector{Float64}, radii)
-    outs = [0.0, 0.0, 0.0, 0.0]
+function get_geometric_measures_with_derivatives(
+    atom_coordinates::Vector, 
+    atom_radii::Vector, 
+    probe_radius::Float64, 
+    delaunay_eps::Float64 = 1.0)
+    
+    measure_outs = [0.0, 0.0, 0.0, 0.0, 0.0]
 
-    AlphaMolWrap.calculate_measures(
-        outs,
-        flat,
-        conv_r,
-        1.0, 1, 0
-    )
-    outs
-end
-
-function get_measures_and_derivatives(coordinates::Vector{SVector{3, Float64}}, radii::SVector)
-    flat = collect(Base.Iterators.flatten(coordinates))
-    conv_r = convert(Vector{Float64}, radii)
-
-    outs = [0.0, 0.0, 0.0, 0.0]
-
-    n = size(coordinates)[1] * 3
+    n = size(atom_coordinates)[1]
 
     dvol_outs = [0.0 for _ in 1:n]
     dsurf_outs = [0.0 for _ in 1:n]
     dmean_outs = [0.0 for _ in 1:n]
     dgauss_outs = [0.0 for _ in 1:n]
 
-    AlphaMolWrap.calculate_measures_and_derivatives(
-        outs,
+    AlphaMolWrap.get_geometric_measures_with_derivatives(
+        measure_outs,
         dvol_outs,
-        dsurf_outs,
+        dsurf_outs, 
         dmean_outs,
         dgauss_outs,
-        flat,
-        conv_r,
-        1.0, 1, 0
+        collect(Base.Iterators.flatten(atom_coordinates)),
+        atom_radii,
+        probe_radius,
+        delaunay_eps
     )
-    outs, dvol_outs, dsurf_outs, dmean_outs, dgauss_outs
+    measure_outs, dvol_outs, dsurf_outs, dmean_outs, dgauss_outs
 end

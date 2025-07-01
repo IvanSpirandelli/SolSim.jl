@@ -6,7 +6,7 @@ function get_dispersed_conf(template_particle::Vector{SVector{3, Float64}}, n::I
     [[e + @SVector[10*interaction_radius * i, 0.0, 0.0] for e in template_particle] for i in 1:n]
 end
 
-function get_dispersed_conf(template_particle::Vector{SVector{3, Float64}}, radii::SVector, n::Int)
+function get_dispersed_conf(template_particle::Vector{SVector{3, Float64}}, radii::Vector{Float64}, n::Int)
     bounding_radius = get_bounding_radius(template_particle, radii)
     [[c + @SVector[10*bounding_radius * i, 0.0, 0.0] for c in template_particle] for i in 1:n]
 end
@@ -15,17 +15,15 @@ function get_scaled_configuration(configuration, sf)
     [@SVector[elem[1] * sf, elem[2] * sf, elem[3] * sf] for elem in configuration]
 end
 
-function get_dispersed_energy(solute_radii::SVector, rs::Float64, prefactors::SVector{4, Float64})
+function get_dispersed_energy(solute_radii::Vector{Float64}, rs::Float64, prefactors::SVector{4, Float64})
     n = length(solute_radii)
-    combined_radii = SVector(ntuple(i -> solute_radii[i] + rs, n))
     conf = get_dispersed_conf(n, maximum(solute_radii) + rs)
-    solvation_free_energy(conf, combined_radii, prefactors)
+    solvation_free_energy(conf, solute_radii, rs, prefactors)
 end
 
 function get_dispersed_energy(template_particle::Vector{SVector{3, Float64}}, n::Int, solute_radii::SVector, rs::Float64, prefactors::SVector{4, Float64})
-    combined_radii = SVector(Tuple(collect(Iterators.flatten([solute_radii for _ in 1:n]))))
     conf = get_dispersed_conf(template_particle, n, sum(solute_radii) + rs)
-    solvation_free_energy(conf, combined_radii, prefactors)
+    solvation_free_energy(conf, solute_radii, rs, prefactors)
 end
 
 # Assumes solute radius of 1.0
