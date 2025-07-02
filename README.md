@@ -51,9 +51,12 @@ $E = p_{wb}V + (\sigma_{wb} - \frac{\kappa_{wb}}{R+r_s})A+ 2\kappa_{wb} C +  \ov
 which is the classic morphometric approach with a different set of prefactors. 
 
 The white bear prefactors are give by:
+
 $\beta p_{wb} = \frac{\eta}{r_s^3} \frac{3}{4\pi}\left(\frac{1+\eta+\eta^2-\eta^3}{(1-\eta)^3}\right)$,
 
-$\beta \sigma_{wb} = \frac{\eta}{r_s^2} \frac{3}{4\pi} \left( - \frac{1+2\eta+8\eta^2-5\eta^3}{3(1-\eta)^3} - \frac{\operatorname{ln}(1-\eta)}{3\eta}\right)$,
-$\beta \kappa_{wb} = \frac{\eta}{r_s} \frac{3}{4\pi} \left(\frac{4  -10\eta+20\eta^2-8\eta^3}{3(1-\eta)^3} + \frac{4\operatorname{ln}(1-\eta)}{3\eta}\right)$,
-$\beta \overline{\kappa}_{wb} = \eta \frac{3}{4\pi} \left(\frac{-4 + 11\eta -13 \eta^2+4\eta^3}{3(1-\eta)^3} - \frac{4\operatorname{ln}(1-\eta)}{3\eta}\right)$.
+$\beta \sigma_{wb} = \frac{\eta}{r_s^2} \frac{3}{4\pi} \left( - \frac{1+2\eta+8\eta^2-5\eta^3}{3(1-\eta)^3} - \frac{\text{ln}(1-\eta)}{3\eta}\right)$,
+
+$\beta \kappa_{wb} = \frac{\eta}{r_s} \frac{3}{4\pi} \left(\frac{4  -10\eta+20\eta^2-8\eta^3}{3(1-\eta)^3} + \frac{4\text{ln}(1-\eta)}{3\eta}\right)$,
+
+$\beta \overline{\kappa}_{wb} = \eta \frac{3}{4\pi} \left(\frac{-4 + 11\eta -13 \eta^2+4\eta^3}{3(1-\eta)^3} - \frac{4\text{ln}(1-\eta)}{3\eta}\right)$.
 
