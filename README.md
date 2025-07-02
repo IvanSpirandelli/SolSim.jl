@@ -44,10 +44,13 @@ $E = p_{wb}V + \sigma_{wb} A + \kappa_{wb} C + \overline{\kappa}_{wb} X + \kappa
 where $p_{wb}, \sigma_{wb}, \kappa_{wb}$ and $\overline{\kappa}_{wb}$ are the [white bear prefactors](https://arxiv.org/abs/cond-mat/0606658).
 
 For a union of balls $\bigcup_{i} B_i$ with radii $r_i > 0$, the mean curvature $C$ can be written as
+
 $C = C^+ + C^- = \sum_{i} \frac{A_i}{r_i+r_s} + C^- = \frac{1}{R+rs}\sum_{i} A_i + C^- = \frac{A}{R+rs} + C^-$,
 
 Therefor we can write $E$ as follows
+
 $E = p_{wb}V + (\sigma_{wb} - \frac{\kappa_{wb}}{R+r_s})A+ 2\kappa_{wb} C +  \overline{\kappa}_{wb} X$,
+
 which is the classic morphometric approach with a different set of prefactors. 
 
 The white bear prefactors are give by:
