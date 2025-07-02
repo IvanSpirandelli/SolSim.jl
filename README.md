@@ -42,7 +42,7 @@ Look at generated output files in [Houdini](https://www.sidefx.com/). A Houdini 
 When generating the data presented in the publication: [Exotic self-assembly of hard spheres in a morphometric solvent](https://www.pnas.org/doi/10.1073/pnas.2314959121) there was bug in the calculation of the geometric measures. The mean curvature can be decomposed into positive and negative parts, i.e. $C = C^+ + C^-$. 
 The bug was that $C^-$ was counted twice. This led to the simulations being driven by the following energy:
 
-$E = p_{wb} V + \sigma_{wb} A+ \kappa_{wb} C +  \overline{\kappa}_{wb} X + \kappa_{wb} C^-$,
+$E = p_{wb} V + \sigma_{wb} A+ \kappa_{wb} C +  \overline{\kappa}_{wb} X + \kappa_{wb} C^{-}$,
 
 where $p_{wb}, \sigma_{wb}, \kappa_{wb}$ and $\overline{\kappa}_{wb}$ are the [white bear prefactors](https://arxiv.org/abs/cond-mat/0606658).
 
